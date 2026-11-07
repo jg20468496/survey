@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>정책 홍보물에 대한 인식 조사</title>
+<style>
+  body { margin: 0; font-family: -apple-system, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; background: #f0ebf8; color: #202124; }
+  .card { max-width: 480px; margin: 48px auto; background: #fff; border-radius: 10px; border-top: 8px solid #673ab7; padding: 32px 24px; text-align: center; }
+  h1 { font-size: 22px; margin: 0 0 12px; }
+  p { color: #555; line-height: 1.6; margin: 0; }
+  a.btn { display: inline-block; margin-top: 24px; padding: 14px 32px; background: #673ab7; color: #fff; border-radius: 8px; text-decoration: none; font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>정책 홍보물에 대한 인식 조사</h1>
+  <p>설문에 참여해 주셔서 감사합니다.<br>잠시 후 설문으로 이동합니다. (5분 내외 소요)</p>
+  <a class="btn" id="go" href="#">설문 시작하기</a>
+</div>
+<script>
+  // 접속할 때마다 A형/B형 중 하나를 50:50 확률로 골라 바로 이동합니다.
+  var FORMS = [
+    'https://docs.google.com/forms/d/e/1FAIpQLSdh6Hm9-qnt1oBempbwl_2gmh7IR4zBBF4CI5vsi0H4RH1hJQ/viewform', // A형 (담당자 제작 표시)
+    'https://docs.google.com/forms/d/e/1FAIpQLSeMOOxFXiVSjl0I0cUgTjawt0bLTro9N4Rg8LxUe4QPInZDkQ/viewform'  // B형 (생성형 AI 제작 표시)
+  ];
+  var url = FORMS[Math.random() < 0.5 ? 0 : 1];
+  document.getElementById('go').href = url;
+  setTimeout(function () { location.replace(url); }, 800);
+</script>
+</body>
+</html>
