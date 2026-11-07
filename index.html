@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>정책 홍보물에 대한 인식 조사</title>
 <style>
   body { margin: 0; font-family: -apple-system, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; background: #f0ebf8; color: #202124; }
@@ -20,13 +21,21 @@
   <a class="btn" id="go" href="#">설문 시작하기</a>
 </div>
 <script>
-  // 접속할 때마다 A형/B형 중 하나를 50:50 확률로 골라 "설문 시작하기" 버튼에 연결합니다.
+  // "설문 시작하기"를 누르는 순간 A형/B형 중 하나를 50:50 확률로 새로 뽑아 이동합니다.
   var FORMS = [
     'https://docs.google.com/forms/d/e/1FAIpQLSdh6Hm9-qnt1oBempbwl_2gmh7IR4zBBF4CI5vsi0H4RH1hJQ/viewform', // A형 (담당자 제작 표시)
     'https://docs.google.com/forms/d/e/1FAIpQLSeMOOxFXiVSjl0I0cUgTjawt0bLTro9N4Rg8LxUe4QPInZDkQ/viewform'  // B형 (생성형 AI 제작 표시)
   ];
-  var url = FORMS[Math.random() < 0.5 ? 0 : 1];
-  document.getElementById('go').href = url;
+  var btn = document.getElementById('go');
+  btn.addEventListener('click', function () {
+    btn.href = FORMS[Math.random() < 0.5 ? 0 : 1];
+  });
+
+  // 뒤로 가기 등으로 이 페이지에 다시 돌아오면 저장된 화면을 쓰지 않고 새로고침합니다.
+  window.addEventListener('pageshow', function (e) {
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if (e.persisted || (nav && nav.type === 'back_forward')) location.reload();
+  });
 </script>
 </body>
 </html>
