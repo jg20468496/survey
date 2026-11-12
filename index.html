@@ -21,14 +21,14 @@
   <a class="btn" id="go" href="#">설문 시작하기</a>
 </div>
 <script>
-  // 2026-11-12 14시 40분경부터 A형 35% : B형 65%로 배정합니다. 비율을 바꾸려면 아래 0.35(A형 확률)만 고치세요.
+  // 배정 비율은 아래 btn.href 줄의 숫자(A형 확률)만 바꾸세요. 1 = A형 100%, 0 = B형 100%, 0.5 = 50:50
   var FORMS = [
     'https://docs.google.com/forms/d/e/1FAIpQLSdh6Hm9-qnt1oBempbwl_2gmh7IR4zBBF4CI5vsi0H4RH1hJQ/viewform', // A형 (담당자 제작 표시)
     'https://docs.google.com/forms/d/e/1FAIpQLSeMOOxFXiVSjl0I0cUgTjawt0bLTro9N4Rg8LxUe4QPInZDkQ/viewform'  // B형 (생성형 AI 제작 표시)
   ];
   var btn = document.getElementById('go');
   btn.addEventListener('click', function () {
-    btn.href = FORMS[Math.random() < 0.35 ? 0 : 1]; // A형 35% : B형 65% (11/11 20시~11/12 14시 40분: A형만, 그 전: 50:50)
+    btn.href = FORMS[Math.random() < 1 ? 0 : 1]; // 1이면 A형 100%, 0이면 B형 100% (11/12 15시 10분~: A형만 / 14시 40분~15시 10분: 35:65 / 11/11 20시~: A형만 / 그 전: 50:50)
   });
 
   // 뒤로 가기 등으로 이 페이지에 다시 돌아오면 저장된 화면을 쓰지 않고 새로고침합니다.
